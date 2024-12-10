@@ -1,0 +1,53 @@
+from yacs.config import CfgNode as CN
+
+_C = CN()
+
+# Drug feature extractor
+_C.DRUG = CN()
+_C.DRUG.NODE_IN_FEATS = 77
+_C.DRUG.PADDING = True
+_C.DRUG.HIDDEN_LAYERS = [128, 128, 128]
+_C.DRUG.NODE_IN_EMBEDDING = 128
+_C.DRUG.MAX_NODES = 200
+
+# Gene feature extractor
+_C.GENE = CN()
+_C.GENE.NUM_FILTERS = [128, 128, 128]
+_C.GENE.KERNEL_SIZE = [3, 6, 9]
+_C.GENE.EMBEDDING_DIM = 128
+_C.GENE.PADDING = True
+
+# Cell feature extractor
+_C.CELL = CN()
+_C.CELL.NUM_FILTERS = [128, 128, 128]
+_C.CELL.KERNEL_SIZE = [3, 6, 9]
+_C.CELL.EMBEDDING_DIM = 1107#go
+_C.CELL.PADDING = True
+
+# BCN setting
+_C.BCN = CN()
+_C.BCN.HEADS = 2
+
+# MLP decoder
+_C.DECODER = CN()
+_C.DECODER.NAME = "MLP"
+_C.DECODER.IN_DIM = 256
+_C.DECODER.HIDDEN_DIM = 512
+_C.DECODER.OUT_DIM = 128
+_C.DECODER.BINARY = 1
+
+# SOLVER
+_C.SOLVER = CN()
+_C.SOLVER.MAX_EPOCH = 200
+_C.SOLVER.BATCH_SIZE = 64
+_C.SOLVER.NUM_WORKERS = 4
+_C.SOLVER.LR = 5e-5
+_C.SOLVER.DA_LR = 1e-3
+_C.SOLVER.SEED = 2024
+
+# RESULT
+_C.RESULT = CN()
+_C.RESULT.SAVE_MODEL = True
+
+def get_cfg_defaults():
+    return _C.clone()
